@@ -4,9 +4,10 @@ Interspace: A Top Down Space Shooter for Love2D
 Inspired by the games "Operation: Innerspace" and "Starscape", Interspace will be a top down shooter with added RPG and RTS elements and a lot of AI and Procedural content.
 
 To run:
-1. Install Love2D version 0.8.0 or above. https://love2d.org/
+1. Install Love2D version 0.8.0 or above. (Ubuntu 12.04 has an older version but there are .deb downloads and a PPA on the Love2d site.) https://love2d.org/
 2. Put all files and sub-dirs into one folder (Interspace)
 3. Get the HUMP libraries and place in a folder called hump in the main folder. http://vrld.github.com/hump/#download
+  (Note: If cloning with git, Hump is linked as a submodule. This link explains how to clone the submodule: http://git-scm.com/book/en/Git-Tools-Submodules )
 4. To run either 
   a. In Linux command line, run "love Interspace" from parent directory. 
   b. In Windows and Linux, zip the folder, rename to a .love file and double-click to run (may need to set as executable in Linux)
