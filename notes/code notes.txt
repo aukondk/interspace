@@ -1,0 +1,106 @@
+Used code from:
+
+Radial Gravity
+http://www.vellios.com/2010/06/06/box2d-and-radial-gravity-code/
+
+https://love2d.org/wiki/Tutorial:Physics
+
+Hump
+http://vrld.github.com/hump/
+
+
+To look at:
+Cameras in depth (parallax)
+http://nova-fusion.com/2011/04/19/cameras-in-love2d-part-1-the-basics/
+
+Modular code
+http://stackoverflow.com/questions/9673105/modular-code-structure-in-lua
+
+Menu
+https://love2d.org/forums/viewtopic.php?f=5&t=3636
+
+multiplayer
+https://love2d.org/wiki/Tutorial:Networking_with_UDP
+
+https://love2d.org/wiki/love.run
+https://love2d.org/wiki/Tutorial:Callback_Functions
+
+Draw Origins
+http://nova-fusion.com/2011/05/06/draw-origins-in-love2d/
+
+Collisions
+https://love2d.org/wiki/Tutorial:PhysicsCollisionCallbacks
+https://love2d.org/wiki/Contact
+
+Remember:
+Colon is used with "self"
+
+
+TODO:
+
+*toggle things like gravity with key or setting, zoom
+
+*Add max range to gravity effects, too realisic for such a small area.
+
+*Play inner space, starscape for some ideas
+
+*Journal
+  Intro to game
+  Progress so far
+  Comments on individual elements
+
+*Game Design Bible 
+
+*AI (Try using UFO ship without angles, just thrust via vector)
+  See concept below
+*Player Control
+  Use same model as AI control, player object, can be switched with AI etc
+  Put all controllers into same table to update() with one line? Worth it?
+*Weapons:
+  Multiple bullets in world at once. Range limited.
+  Other weapons systems.
+*Asteroids: Start large, spawn two smaller when destroyed.
+*Parallax Background (write camera from scratch to understand)
+*other cool camera stuff (detach, move with mouse etc)
+*ship characteristics variable - type of thrusters etc
+*intro & Menus
+  Gamestates
+*Object creation
+  Base object definitions? Useful for different ships?
+  Inherit from object types. objects.player = obj.newShip(type="fighter", player=true, x=100, y=100, )
+*custom shape (not rectangle or circle) on ships
+*Clash of body spawn position causes big problems. Add position check?
+*Online
+  BLOG!!!!
+  Github
+  G+
+  GIFs
+  Podcast
+  Vidcast Youtube
+*Sound system (problem with update to keep thruster playing
+*Music
+
+*Other smaller games to practice
+
+Done/concept done:
+*Shooting
+  Creates new object and applies force in direction of shooter.
+*Damage
+  Each object has variables integrity and hitdamage.
+  When collision happens beginContact() hitdamage of each is taken from integrity of other object.
+  When integrity is empty, object is destroyed (marked as "isdead = true" then removed at start of next update cycle)
+  TODO: velocity of impact should effect damage.
+  TODO: explosion etc
+*Gravity
+*AI (concept)
+  Create new AI, pass object as variable. (object could be new or controlled by player or other AI before)
+    self.update = intent(self)
+    self.object = objects.object
+  Every Update start with intent (can change every second)
+  Choose intent (attack, defend, scout etc)
+    can have different priorities depends on faction, mission, orders from player or higher ai etc
+  Scout picks spot on map (uses search patterns) and uses move function to get there. If close enough, pick new spot.
+  Move will check distance from target, if not close enough, check if pointing towards it. If not, use turn function to do a turn movement towards right angle. When pointing in right direction, use thrust function.
+  Attack will get position of enemy and pass to move function. When in range and pointing in right direction it will use shoot function.
+  Defend will get id of object which has targeted a friendly (or themselves) and pass to attack function.
+  When AI controlled object destroyed remove or pass control to ejected eva.

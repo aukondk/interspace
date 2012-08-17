@@ -1,0 +1,31 @@
+Interspace: A Top Down Space Shooter for Love2D
+(c) 2012 Stephen Ward (AukonDK) aukondk.com bluedrava.com 
+
+Inspired by the games "Operation: Innerspace" and "Starscape", Interspace will be a top down shooter with added RPG and RTS elements and a lot of AI and Procedural content.
+
+To run:
+1. Install Love2D version 0.8.0 or above. https://love2d.org/
+2. Put all files and sub-dirs into one folder (Interspace)
+3. Get the HUMP libraries and place in a folder called hump in the main folder. http://vrld.github.com/hump/#download
+4. To run either 
+  a. In Linux command line, run "love Interspace" from parent directory. 
+  b. In Windows and Linux, zip the folder, rename to a .love file and double-click to run (may need to set as executable in Linux)
+  c. In Windows, drag folder onto Love desktop shortcut (not tried this)
+
+Code should be well commented and my notes are in the "notes" sub folder. Might give an idea as to where my weird brain is taking this thing.
+
+Licence:
+GPLv3
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>

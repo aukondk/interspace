@@ -1,0 +1,43 @@
+Interspace Journal.
+Notes for writing blogs.
+
+*Introducing Interspace
+Interspace is a new game I'm working on using Love2d. Love2d is a great open source and cross platform engine for making 2d games using Lua scripting. Something you may have heard of which uses it is Mari0, the Super Mario/Portal crossover game from stabyourself.net.
+
+Interspace is inspired by the old Win 3.1 game "Operation: Inner Space" (which I learned is still being sold on the companies website.) The old game had Asteroids-like gameplay but the plot involved you flying inside your computer and rescuing your files from a virus. The neat thing was that the game looked at the files inside your own system, so you could be rescuing your own resume.doc or doom.exe (complete with icon if it had one). 
+Another similar game was "Virus", which took also allowed you to fly inside your own system, but this time it was a full 3d shooter like Descent. It also had a bit of a RTS base-building system which I want to add to Interspace.
+Yet another game was Starscape, story driven Asteroids like RPG
+
+So Interspace will involve (if things go according to plan):
+* Top down space shooter action (think Asteroids)
+* Radial Gravity (The objects in the play field are attracted to each other, think Spacewar and Angry Birds Space)
+* Trade. Shoot asteroids to get resources, trade with others. Upgrade your ship.
+* RTS and Tower defence. Get enough money to buy or build stations. Take control of a star system, mine resources and defend from attack.
+* The generation of the star systems will start off pre-made or procedurally generated, but I want to incorporate the idea of using your own operating system and files as part of it. Perhaps you attack websites on the internet and the real web content is displayed in game.
+* Multiplayer
+
+*Details of environment.
+I'm running Kubuntu 12.04 on my laptop. I installed Love2d from a PPA to get version 0.8.0. Kate is my text editor, Gimp for graphics (probably inkscape later) and audacity for sound.
+
+*Using my whiteboard
+
+*Coding guide.
+Basics of Love2d (load, update, draw)
+Once you have Love2d installed, the first thing you need is a folder with a main.lua file in it. Inside main.lua you create 3 functions, love.load, love.update and love.draw.
+In load goes all the things that need to be loaded once, initial setup of variables and importing images and sound.
+In update is each function which needs run over and over during the course of the game. For example there can be a function checking if an object had reached the edge of the screen and if it has it can tell it to change direction.
+The variable in update (usually written love.update(dt)) refers to how many times the function is ran over time. If you have an object moving across the screen using code such as x = x + 1, then different machines will add that 1 at different rates. Instead do x = x + 1*dt to keep the rate tot he same time interval.
+In draw are the functions that draw images on the screen. This executes at the speed of the display which is different to the speed that update runs at.
+The order that you 
+
+*Love2d Physics
+  based on box2d
+  Very deep
+
+*Kate text editor
+
+*Workflow
+
+*AI ideas
+
+* Animated GIFs and Videos

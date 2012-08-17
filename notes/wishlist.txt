@@ -1,0 +1,161 @@
+Notes of things I want to do with Interspace.
+
+
+*System generation
+  Create system for generating file/operating system procedurally. Able to plug in to any game that needs it.
+
+*Levels need to be made either procedurally or manually. Perhaps names of ships and systems etc can be based on locality (USS Liverpool)
+
+*Links to computer setting
+  Names (Weapon could be "Logic Bomb" etc)
+  Solar Systems are one computer. Planets large folders etc
+  Currency are "Cycles"
+  Gates/Links between solar systems
+  
+*Campaign Gameplay
+  freeroaming between solar systems, some places require reputation or good defences to pass though safely.
+  Shoot asteroids to get resources
+  Defend against nasties, take goodies
+  Attack neutral or friendly for goodies, but reduce reputation and make enemies.
+  Trade
+  Upgrade/trade in/buy ships
+  Build and Expand
+  Join or make own faction
+  NPC or Faction Missions
+  Board and takeover ships
+  Tow deralicts to trade or fix up.
+
+*Map
+  Network map, boxes to click on to explore network and eventually internet. Also see who "owns" territory.
+  
+*Weapons systems
+  Hitscan
+  Rockets (dumb and smart)
+  Lazers
+  Area Effect
+  Harpoon
+  Turret control (good for capital ships)
+  Shield
+  Cloak
+  Gravity repel/inverter/blackhole
+  Ion Cannon (to disable and board)
+  Bombs
+  
+*Engines
+  Warp
+  Hyper
+  IID (Infinite Improbility)
+
+*Assist Systems
+  Autopilot
+  Course projection
+  Mouse control
+  Eject
+
+*Ships
+  Different limits to type of weapons, engines, thrusters
+  Classes
+    Fighters
+      Small, fast, start with this, dock with larger ships
+    Carriers
+      Can hold lots of smaller ships
+    Frigates
+      Hold only one fighter but good for cargo
+    Warships
+      Shitloads of weapons and defence
+    EVA (from ejection or small monsters)
+      weak but some teams could use many to overwhelm/board large craft
+
+*Factions (could join and be given missions by AI, Go up in rank and take over. You have reputation with all of them which judges each of their responses to you)
+  Empire
+    Nasty & pointy (a la Star Wars)
+  Federation
+    Fair
+    Explorers
+    No trade (a la Star Trek)
+  Alliance
+  Coalition
+  Collective (Borglike)
+    Hivemind (interesting AI?)
+    Amoral
+    Join when assimulated (interesting)
+  Virus
+  Union
+  East Internet Trading Company
+    Solar sail ships
+      Fuel only needed if solar winds not in right dir
+  Pirates
+  Independent
+    This is you when you start campaign
+  Make own faction.
+    Registration costs but allows you to employ AI workers
+  Monsters
+    Roam around
+    Primal AI
+    Some are pack hunters
+    Sharks
+    Octopus
+    Snakes
+  
+*Control and AI
+  Player and AI use same commands to control Objects
+  Player can use different control systems (mouse driven RTS style with AI ships)
+  Player and AI can "take control" of all objects if commands exist in object.
+  Data about AI "mind" like name, temperament generated and passed to make new AI player. Perhaps selected by Command player/AI before battle.
+
+*Communication system
+  Dynamic Audio/Text taunts/commentary from AI
+  Radio scanner can be bought to "listen in" to enemy orders
+  
+*Slomo effect
+  something to do with dt, multiply by slomo variable.
+  slow down action when drama happens, death of final baddie? Near miss?
+  
+*Intro
+  Logos
+  Scrolling playfield
+  Title
+
+*Menu
+  Ships fighting in background?
+
+*Background
+  Parallax (new camera system from scratch?)
+  Grid, stars, fractals? system generated?
+  
+*Boss AI
+  Like an RTS player, gives orders to ships based on mission and status of battlefield.
+  Boss could be attached to particular craft so lower ranks become unorganised when flagship destroyed.
+  Could have multiple ranks (ship captains, squad leaders etc)
+  
+*Resources
+  Icons worth "cycles"-currency
+    Collected from destroying asteroids
+    Mining asteroids gives more
+    Collect from destroying other ships
+  Solar energy?
+  Fuel
+    Used for ships
+    Costs to refuel
+
+*Bases (built by you or others)
+  Factories
+  Trade stations
+  Defences
+    turrets
+    mines
+  Mining
+  Solar collectors
+  Refineries and Harvesters
+  
+*Research
+
+*Arcade Gamemodes
+  Races
+  Tower defence
+  Asteroids
+  Defender (collect stranded EVAs and defend from monsters)
+  
+*Wingman
+
+*Planet landing in "Lunar Lander" style
