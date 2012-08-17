@@ -35,12 +35,12 @@ function obj:newShip(x,y)
   self.left = function (dt) self.body:applyTorque(-200000*dt) end
   self.right = function (dt) self.body:applyTorque(200000*dt) end
   self.thrust = function () self.body:applyForce(self.thrustAmt * math.cos(self.body:getAngle()), self.thrustAmt *  math.sin(self.body:getAngle())) end
-  self.shoot = function () objects.weapons.bullet1 = obj:newBullet(self.body:getX() + (50 * math.cos(self.body:getAngle())), self.body:getY() + (50 * math.sin(self.body:getAngle())), self.body:getAngle()) end
+  self.canshoot = 1
+  self.shoot = function () if (self.canshoot >= 1) then table.insert(objects.bullets, obj:newBullet(self.body:getX() + (50 * math.cos(self.body:getAngle())), self.body:getY() + (50 * math.sin(self.body:getAngle())), self.body:getAngle())) self.canshoot = 0 end end
   self.integrity = 500
   self.hitdamage = 10
-    self.update = function () if self.integrity <= 0 then table.remove(self) end end
-    self.isdead = false
-    self.update = function () if self.integrity <= 0 then self.isdead = true end end
+  self.isdead = false
+  self.update = function (dt) if (self.canshoot < 1) then self.canshoot = self.canshoot + 2*dt end if self.integrity <= 0 then self.isdead = true end end
   return self
 end
 
@@ -57,7 +57,8 @@ function obj:newBullet(x, y, a)
   self.integrity = 1
   self.hitdamage = 10
   self.isdead = false
-    self.update = function () if self.integrity <= 0 then self.isdead = true end end
+  self.time = 1
+  self.update = function (dt) self.time = self.time - 2*dt if self.time <= 0 then self.isdead = true end if self.integrity <= 0 then self.isdead = true end end
   return self
 end
 
@@ -89,9 +90,8 @@ function obj:newStar()
   self.drawmap = function () love.graphics.circle("fill", 900 + (self.body:getX()/(worldloop/100)), 10 + (self.body:getY()/(worldloop/100)), self.shape:getRadius()/(worldloop/100)) end
   self.integrity = 10000
   self.hitdamage = 10000
-    self.update = function () if self.integrity <= 0 then table.remove(self) end end
-        self.isdead = false
-    self.update = function () if self.integrity <= 0 then self.isdead = true end end
+  self.isdead = false
+  self.update = function () if self.integrity <= 0 then self.isdead = true end end
   return self
 
 end

@@ -63,8 +63,8 @@ function love.load()
   objects.asteroids[i] = obj:newAsteroid(math.random()*worldloop,math.random()*worldloop,1)
   end
 
-  -- Weapons table, for bullet objects created by player
-  objects.weapons = {}
+  -- Bullets table, for bullet objects created by player
+  objects.bullets = {}
   
   --Graphics setup
   love.graphics.setBackgroundColor(0, 0, 0)
@@ -81,7 +81,7 @@ function love.update(dt)
   --remove dead objects before called
   for a,b in pairs(objects) do
     for i,v in pairs(b) do
-      if v.isdead then print(time .. " " .. i .. " is dead") b[i] = nil end
+      if v.isdead then print(time .. " " .. a .. " " .. i .. " is dead") b[i] = nil end
     end
   end
   
@@ -118,7 +118,7 @@ function love.update(dt)
   --updates and applies gravity force on each object TODO Add to objectupdate()
   for a,b in pairs(objects) do
     for i,v in pairs(b) do
-      v.update()
+      v.update(dt)
       for d,c in pairs(objects) do
 	for k,h in pairs(c) do
 	  if (i ~= k) then
@@ -164,7 +164,6 @@ function radgravity(object1, object2)
   
   --Added a distance limit to stop all objects falling into centre of level and forming gravity well (OF DOOM!)
   if (distance:len() < 1000) then
-    print(distance:len())
     object1.body:applyLinearImpulse(normforce.x,normforce.y,object1.body:getX(),object1.body:getY())  
   end
 end
