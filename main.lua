@@ -155,13 +155,18 @@ end
 --Radial Gravity, Method cribbed from http://www.vellios.com/2010/06/06/box2d-and-radial-gravity-code/ and blog comment by Joseph Le Brech
 function radgravity(object1, object2)
   --body1 effected, body2 effector
-  --TODO Add a distance limit to stop all objects falling into centre of level and forming gravity well (OF DOOM!)
+
   vector1 = vector(object1.body:getX(),object1.body:getY())
   vector2 =  vector(object2.body:getX(),object2.body:getY())
   distance = vector2 - vector1
   force = object2.force / distance:len2()
   normforce = force*distance
-  object1.body:applyLinearImpulse(normforce.x,normforce.y,object1.body:getX(),object1.body:getY())  
+  
+  --Added a distance limit to stop all objects falling into centre of level and forming gravity well (OF DOOM!)
+  if (distance:len() < 1000) then
+    print(distance:len())
+    object1.body:applyLinearImpulse(normforce.x,normforce.y,object1.body:getX(),object1.body:getY())  
+  end
 end
 
 
