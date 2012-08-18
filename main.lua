@@ -19,7 +19,7 @@ function love.load()
   vector = require("hump.vector")
   camera = require("hump.camera")
   require("obj")
-  --require("ai")
+  require("ai")
   
   time = 0
   
@@ -47,11 +47,14 @@ function love.load()
   objects.ships.player = obj:newShip(100,100)
   
   --ai ship
-  enemy = {}
-  --enemy.fighter = ai:newEnemyAI(3000,3000)
+  enemyai = {}
+  objects.ships.ufo = obj:newUFO(300,300)
+  enemyai.ufo = ai:newPilot(objects.ships.ufo)
+  objects.ships.ufo2 = obj:newUFO(1000,1000)
+  enemyai.ufo2 = ai:newPilot(objects.ships.ufo2)
   
   --Dummy ship.
-  --objects.ships.dummy = obj:newShip(200,200)
+  --objects.ships.dummy = obj:newUFO(200,200)
   
   objects.stars = {}
   --Sun
@@ -59,7 +62,7 @@ function love.load()
   
   objects.asteroids = {}
   --Test asteroids
-  for i = 0, 30, 1 do
+  for i = 0, 20, 1 do
   objects.asteroids[i] = obj:newAsteroid(math.random()*worldloop,math.random()*worldloop,1)
   end
 
@@ -106,12 +109,13 @@ function love.update(dt)
   --TODO Zooming out when fast (cam.zoom)
   
   --player velocity (for debug)
-  velx, vely = objects.ships.player.body:getLinearVelocity()
-  vel = math.sqrt(velx^2 + vely^2)
+  --velx, vely = objects.ships.player.body:getLinearVelocity()
+  --vel = math.sqrt(velx^2 + vely^2)
   
   --Centre camera on player
   cam.x, cam.y = objects.ships.player.body:getX(),objects.ships.player.body:getY()
-  
+  --cam.x, cam.y = objects.ships.ufo.body:getX(),objects.ships.ufo.body:getY()
+
   --rotate camera with ship (TODO toggle option)
   --cam.rot = -objects.ships.player.body:getAngle() + math.rad(-90)
   
@@ -129,7 +133,8 @@ function love.update(dt)
     end
   end
 
---enemy.fighter.update()
+enemyai.ufo.update(dt)
+enemyai.ufo2.update(dt)
 
 --Player control (TODO: Different method of turning for each type of ship? (torque, thrusters) TODO configurable keys TODO seperate table for player control like with AI.
 
@@ -140,6 +145,7 @@ function love.update(dt)
     objects.ships.player.right(dt)
   elseif love.keyboard.isDown("up") then
     objects.ships.player.thrust()
+    --TODO image change and sound should be part of thrust routine
     objects.ships.player.image = objects.ships.player.imageThrust
     love.audio.play(thrustsound)
     
@@ -193,7 +199,7 @@ function love.draw()
   cam:detach()
     
   --debug
-  love.graphics.print( "coords " .. math.floor(objects.ships.player.body:getX()) .. "x" .. math.floor(objects.ships.player.body:getY()) .. " rot " .. objects.ships.player.body:getAngle() .. " speed " .. vel, 10, 10, 0, 1, 1)
+  love.graphics.print( "coords " .. math.floor(objects.ships.player.body:getX()) .. "x" .. math.floor(objects.ships.player.body:getY()) .. " rot " .. objects.ships.player.body:getAngle(), 10, 10, 0, 1, 1)
   
   --HUDMap (TODO make seperate function)
   love.graphics.setColor(50,50,50,200)
@@ -211,7 +217,7 @@ end
 
 --Physics Callbacks: https://love2d.org/wiki/Tutorial:PhysicsCollisionCallbacks
 function beginContact(a, b, coll)
-  --vx, vy = coll:getVelocity()
+  --vx, vy = coll:getLinearVelocity()
   --speed = math.sqrt(vx^2 + vy^2)
   object1 = a:getUserData()
   object2 = b:getUserData()

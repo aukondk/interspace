@@ -44,6 +44,14 @@ function obj:newShip(x,y)
   return self
 end
 
+function obj:newUFO(x,y)
+  self = obj:newShip(x,y)
+  self.shape = love.physics.newCircleShape(25)
+  self.imageNormal = love.graphics.newImage("gfx/ufo.png")
+  self.image = self.imageNormal
+  return self
+end
+
 function obj:newBullet(x, y, a)
   self = {}
   self.body = love.physics.newBody(world, x, y, "dynamic")

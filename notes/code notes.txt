@@ -40,11 +40,9 @@ TODO:
 
 *toggle things like gravity with key or setting, zoom
 
-*Add max range to gravity effects, too realisic for such a small area.
-
 *Play inner space, starscape for some ideas
 
-*Journal
+*Journal/blog
   Intro to game
   Progress so far
   Comments on individual elements

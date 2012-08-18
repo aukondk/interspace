@@ -14,56 +14,52 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>--]]
 
---TODO Need to rewrite this whole thing, needs to be passed an object table instead of creating new object.
 
 ai = {}
 
-function ai:newEnemyAI(x,y)
+--base AI for flying ship, could be used for player autopilot
+function ai:newPilot(ship)
   self = {}
-  self.pos.x = x
-  self.pos.y = y
-  objects.self = obj:newShip(x,y)
-  self.target = nil
-  self.update = function () self.pos.x = object.self.body:getX() self.pos.y = object.self.body:getY() ai.intent(self.target, self.pos) end
+  self.ship = ship
+  self.target = {}
+  --Initial target is object start position. Later if target is in range of position then next sequence is triggered.
+  self.target.x = self.ship.body:getX()
+  self.target.y = self.ship.body:getY()
+  self.update = function (dt) ai.roam(self) end
+  return self
 end
 
-function ai.intent(target, pos)
-  --check for enemy in detection range
-  --enemy = objects.player
-  --if enemy, 
-  --ai.attack(enemy)
-  
-  --if not, 
-  ai.scout(target, pos)
-end
-
-function ai.scout(target, pos)
-  --check for existing target  
-  if (target = nil) then
-  --if not, pick point on map (search pattern?)
-    target = ["x" = rand(0, worldloop), "y" = rand(0,worldloop)]
+function ai.roam(current)
+-- When in range of target area, pic new one at random.
+  if ((current.target.x >= current.ship.body:getX()-100) and (current.target.x < current.ship.body:getX()+100)) and ((current.target.y >= current.ship.body:getY()-100) and (current.target.y < current.ship.body:getY()+100)) then
+    current.target.x = math.random(100, worldloop - 100)
+    current.target.y = math.random(100, worldloop - 100)
+    print(current.target.x, current.target.y)
   end
-  ai.move(target, pos)
-  --move towards it
-  --return target
+  
+  ai.moveto(current.ship, current.target)
+  
 end
 
-function ai.move(target, pos)
-    --body1 effected, body2 effector
-  local vector1 = vector(pos.x, pos.y)
+function ai.moveto(ship, target)
+
+  local vector1 = vector(ship.body:getX(),ship.body:getY())
   local vector2 =  vector(target.x,target.y)
   local distance = vector2 - vector1
-  local force = object2.force / distance:len2()
+  local force = 1
   local normforce = force*distance
-  objects.self.body:applyForce(normforce.x,normforce.y) 
-  --if facing target, thrust
-  --if not, turn
+  local velx, vely = ship.body:getLinearVelocity()
+  local vel = math.sqrt(velx^2 + vely^2)
   
+  if ((distance:len() > 10) and (vel < 500)) then
+    ship.body:setLinearDamping(0) --handbrake off
+    ship.body:applyForce(normforce.x,normforce.y)
+  elseif ((distance:len() > 10) and (vel > 500)) then
+    ship.body:setLinearDamping(1)
+    --ship.body:applyForce(-normforce.x,-normforce.y) 
+  elseif ((distance:len() <= 100)) then
+    ship.body:setLinearDamping(2) --handbrake on
+  end
+
 end
 
-
-function ai.attack(target)
-  --if in range of target, turn towards it
-  --if facing, fire
-  --if not in range, move(target)
-end
