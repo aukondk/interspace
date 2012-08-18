@@ -22,10 +22,26 @@ function ai:newPilot(ship)
   self = {}
   self.ship = ship
   self.target = {}
+
+
+  return self
+end
+
+function ai:newEnemy(ship)
+  self = ai:newPilot(ship)
+  
+  self.update = function (dt) ai.attack(self, objects.ships.player) end  
+  
+  return self
+end
+
+function ai:newNeutral(ship)
+  self = ai:newPilot(ship)
   --Initial target is object start position. Later if target is in range of position then next sequence is triggered.
   self.target.x = self.ship.body:getX()
-  self.target.y = self.ship.body:getY()
-  self.update = function (dt) ai.roam(self) end
+  self.target.y = self.ship.body:getY()  
+  self.update = function (dt) ai.roam(self) end  
+  
   return self
 end
 
@@ -36,6 +52,20 @@ function ai.roam(current)
     current.target.y = math.random(100, worldloop - 100)
     print(current.target.x, current.target.y)
   end
+  
+  ai.moveto(current.ship, current.target)
+  
+end
+
+function ai.attack(current, target)
+
+  current.target.x = target.body:getX()
+  current.target.y = target.body:getY()
+  local distance = vector(current.target.x,current.target.y) - vector(current.ship.body:getX(),current.ship.body:getY())
+  if (distance:len() < 100) then
+    --current.shoot()
+  end
+
   
   ai.moveto(current.ship, current.target)
   

@@ -49,6 +49,7 @@ function obj:newUFO(x,y)
   self.shape = love.physics.newCircleShape(25)
   self.imageNormal = love.graphics.newImage("gfx/ufo.png")
   self.image = self.imageNormal
+  --self.shoot = function () if (self.canshoot >= 1) then table.insert(objects.bullets, obj:newBullet(self.body:getX() + (50 * math.cos(self.body:getAngle())), self.body:getY() + (50 * math.sin(self.body:getAngle())), self.body:getAngle())) self.canshoot = 0 end end
   return self
 end
 

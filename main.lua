@@ -49,9 +49,9 @@ function love.load()
   --ai ship
   enemyai = {}
   objects.ships.ufo = obj:newUFO(300,300)
-  enemyai.ufo = ai:newPilot(objects.ships.ufo)
+  enemyai.ufo = ai:newNeutral(objects.ships.ufo)
   objects.ships.ufo2 = obj:newUFO(1000,1000)
-  enemyai.ufo2 = ai:newPilot(objects.ships.ufo2)
+  enemyai.ufo2 = ai:newEnemy(objects.ships.ufo2)
   
   --Dummy ship.
   --objects.ships.dummy = obj:newUFO(200,200)
