@@ -136,7 +136,7 @@ function love.update(dt)
 enemyai.ufo.update(dt)
 enemyai.ufo2.update(dt)
 
---Player control (TODO: Different method of turning for each type of ship? (torque, thrusters) TODO configurable keys TODO seperate table for player control like with AI.
+--Player control (TODO: Different method of turning for each type of ship? (torque, thrusters) TODO configurable keys TODO seperate table for player control like with AI. Look at love.keyboard.setKeyRepeat
 
   objects.ships.player.image = objects.ships.player.imageNormal
   if love.keyboard.isDown("left") then 
@@ -148,7 +148,11 @@ enemyai.ufo2.update(dt)
     --TODO image change and sound should be part of thrust routine
     objects.ships.player.image = objects.ships.player.imageThrust
     love.audio.play(thrustsound)
-    
+  --Spacebrakes!
+  elseif love.keyboard.isDown("rshift") then  
+    objects.ships.player.body:setLinearDamping(2)
+  elseif love.keyboard.isUp("rshift") then  
+    objects.ships.player.body:setLinearDamping(0)
   elseif love.keyboard.isDown(" ") then
     objects.ships.player.shoot()
     love.audio.play(pewsound)
