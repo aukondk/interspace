@@ -151,13 +151,14 @@ enemyai.ufo2.update(dt)
   --Spacebrakes!
   elseif love.keyboard.isDown("rshift") then  
     objects.ships.player.body:setLinearDamping(2)
-  elseif love.keyboard.isUp("rshift") then  
-    objects.ships.player.body:setLinearDamping(0)
+
+
   elseif love.keyboard.isDown(" ") then
     objects.ships.player.shoot()
     love.audio.play(pewsound)
   else
     love.audio.stop(thrustsound)
+    objects.ships.player.body:setLinearDamping(0)
   end
   
 end
@@ -228,8 +229,8 @@ function beginContact(a, b, coll)
   if ((object1.isdead == true) or (object2.isdead == true)) then
     coll:setEnabled(false)
   else
-  object1.integrity = object1.integrity - object2.hitdamage --* speed
-  object2.integrity = object2.integrity - object1.hitdamage --* speed
+  object1.integrity = object1.integrity - object2.hitdamage-- * speed
+  object2.integrity = object2.integrity - object1.hitdamage-- * speed
   end
 end
 
