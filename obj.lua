@@ -104,3 +104,37 @@ function obj:newStar()
   return self
 
 end
+
+function obj:newStation(x,y)
+  self = {}
+  self.body = love.physics.newBody(world, x, y, "dynamic")
+  self.shape = love.physics.newCircleShape(200)
+  self.fixture = love.physics.newFixture(self.body, self.shape, 1)
+  self.fixture:setUserData(self)
+  self.force = 100
+  self.draw = function () love.graphics.circle("fill", self.body:getX(), self.body:getY(), self.shape:getRadius()) end
+  self.drawmap = function () love.graphics.circle("fill", 900 + (self.body:getX()/(worldloop/100)), 10 + (self.body:getY()/(worldloop/100)), self.shape:getRadius()/(worldloop/100)) end
+  self.integrity = 1000
+  self.hitdamage = 100
+  self.isdead = false
+  self.update = function () obj.deflector(self) if self.integrity <= 0 then self.isdead = true end end
+  return self
+
+end
+
+function obj.deflector(generator)
+  for a,b in pairs(objects) do
+    for i,v in pairs(b) do
+      if (v ~= generator) then
+      vector1 = vector(v.body:getX(),v.body:getY())
+      vector2 =  vector(generator.body:getX(),generator.body:getY())
+      distance = vector2 - vector1
+      force = generator.force / distance:len2()
+      normforce = force*distance
+      if (distance:len() < 1000) then
+	v.body:applyLinearImpulse(-normforce.x,-normforce.y)  
+      end
+      end
+    end
+  end
+end

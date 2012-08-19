@@ -60,11 +60,15 @@ function love.load()
   --Sun
   --objects.stars.sun = obj:newStar()
   
+  objects.stations = {}
+  objects.stations.station = obj:newStation(worldloop/2, worldloop/2)
+  
   objects.asteroids = {}
   --Test asteroids
-  for i = 0, 20, 1 do
-  objects.asteroids[i] = obj:newAsteroid(math.random()*worldloop,math.random()*worldloop,1)
+  for i = 0, 10, 1 do
+  objects.asteroids[i] = obj:newAsteroid(math.random(0, worldloop),math.random(0, worldloop),1)
   end
+  --objects.asteroids[1] = obj:newAsteroid(1000,2000,1)
 
   -- Bullets table, for bullet objects created by player
   objects.bullets = {}
@@ -222,7 +226,8 @@ end
 
 --Physics Callbacks: https://love2d.org/wiki/Tutorial:PhysicsCollisionCallbacks
 function beginContact(a, b, coll)
-  --vx, vy = coll:getLinearVelocity()
+  --TODO getting velocity of contact errors out as nil value, don't know why.
+  --vx, vy = coll:getVelocity()
   --speed = math.sqrt(vx^2 + vy^2)
   object1 = a:getUserData()
   object2 = b:getUserData()
