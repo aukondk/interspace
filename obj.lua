@@ -40,7 +40,7 @@ function obj:newShip(x,y)
   self.integrity = 500
   self.hitdamage = 10
   self.isdead = false
-  self.update = function (dt) if (self.canshoot < 1) then self.canshoot = self.canshoot + 2*dt end if self.integrity <= 0 then self.isdead = true end end
+  self.update = function (dt) if (self.canshoot < 1) then self.canshoot = self.canshoot + 4*dt end if self.integrity <= 0 then self.isdead = true end end
   return self
 end
 
