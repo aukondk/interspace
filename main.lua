@@ -20,6 +20,7 @@ function love.load()
   camera = require("hump.camera")
   require("obj")
   require("ai")
+  require("weapons")
   
   time = 0
   
@@ -73,6 +74,10 @@ function love.load()
   -- Bullets table, for bullet objects created by player
   objects.bullets = {}
   
+  weapons = {}
+  weapons.beams = {}
+  
+  
   --Graphics setup
   love.graphics.setBackgroundColor(0, 0, 0)
   love.graphics.setMode(1024, 768, false, true, 0)
@@ -90,6 +95,9 @@ function love.update(dt)
     for i,v in pairs(b) do
       if v.isdead then print(time .. " " .. a .. " " .. i .. " is dead") b[i] = nil end
     end
+  end
+  for a,b in pairs(weapons.beams) do
+    if b.duration <= 0 then weapons.beams[a] = nil end
   end
   
   --loop world at edges
@@ -135,6 +143,10 @@ function love.update(dt)
 	end
       end
     end
+  end
+  
+  for a,b in pairs(weapons.beams) do
+    b.update(dt)
   end
 
 enemyai.ufo.update(dt)
@@ -196,7 +208,7 @@ function love.draw()
     love.graphics.line( 0, i, worldloop, i)    
   end  
   
-  love.graphics.setColor(255, 255, 255) --default white colour
+  love.graphics.setColor(255, 255, 255,255) --default white colour
   
   --Draw each object in each table
   for a,b in pairs(objects) do
@@ -205,6 +217,14 @@ function love.draw()
   end
   end
   
+  
+  
+  
+    for a, b in pairs(weapons.beams) do
+      b.draw()
+    end
+    love.graphics.setLineWidth(1)
+  love.graphics.setColor(255, 255, 255,255)
   cam:detach()
     
   --debug

@@ -36,7 +36,7 @@ function obj:newShip(x,y)
   self.right = function (dt) self.body:applyTorque(200000*dt) end
   self.thrust = function () self.body:applyForce(self.thrustAmt * math.cos(self.body:getAngle()), self.thrustAmt *  math.sin(self.body:getAngle())) end
   self.canshoot = 1
-  self.shoot = function () if (self.canshoot >= 1) then table.insert(objects.bullets, obj:newBullet(self.body:getX() + (50 * math.cos(self.body:getAngle())), self.body:getY() + (50 * math.sin(self.body:getAngle())), self.body:getAngle())) self.canshoot = 0 end end
+  self.shoot = function () if (self.canshoot >= 1) then weapon.laser(self) end end--table.insert(objects.bullets, obj:newBullet(self.body:getX() + (50 * math.cos(self.body:getAngle())), self.body:getY() + (50 * math.sin(self.body:getAngle())), self.body:getAngle())) self.canshoot = 0 end end
   self.integrity = 500
   self.hitdamage = 10
   self.isdead = false
