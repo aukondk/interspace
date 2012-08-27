@@ -23,6 +23,7 @@ function weapon:newLaser(ship)
   self.draw = function () love.graphics.setLineWidth(3) love.graphics.setColor(255, 100, 100, self.duration * 255) love.graphics.line(self.ray.startx, self.ray.starty,self.ray.endx, self.ray.endy) end
   
   world:rayCast( self.ray.startx, self.ray.starty, self.ray.endx, self.ray.endy, weapon.lasercallback )
+  love.audio.play(pewsound)
   --table.insert(beams, self.ray)
   --print(ray.startx, ray.starty, ray.endx, ray.endy)
   ship.canshoot=0

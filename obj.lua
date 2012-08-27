@@ -32,14 +32,15 @@ function obj:newShip(x,y)
   self.draw = function () love.graphics.draw(self.image, self.body:getX(), self.body:getY(), self.body:getAngle(), 1/2, 1/2, 50, 50) love.graphics.print( self.integrity, self.body:getX(), self.body:getY()) end
   self.drawmap = function () love.graphics.draw(self.image, 900 + (self.body:getX()/(worldloop/100)), 10 + (self.body:getY()/(worldloop/100)), self.body:getAngle(), 1/10, 1/10, 50, 50) end
   self.thrustAmt = 100
-  self.left = function (dt) self.body:applyTorque(-200000*dt) end
-  self.right = function (dt) self.body:applyTorque(200000*dt) end
+  self.left = function (dt) self.body:applyTorque(-100000*dt) end
+  self.right = function (dt) self.body:applyTorque(100000*dt) end
   self.thrust = function () self.body:applyForce(self.thrustAmt * math.cos(self.body:getAngle()), self.thrustAmt *  math.sin(self.body:getAngle())) end
   self.canshoot = 1
   self.shoot = function () if (self.canshoot >= 1) then weapon.laser(self) end end--table.insert(objects.bullets, obj:newBullet(self.body:getX() + (50 * math.cos(self.body:getAngle())), self.body:getY() + (50 * math.sin(self.body:getAngle())), self.body:getAngle())) self.canshoot = 0 end end
   self.integrity = 500
   self.hitdamage = 10
   self.isdead = false
+  self.body:setLinearDamping(0.1)
   self.update = function (dt) if (self.canshoot < 1) then self.canshoot = self.canshoot + 4*dt end if self.integrity <= 0 then self.isdead = true end end
   return self
 end

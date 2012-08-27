@@ -171,10 +171,10 @@ enemyai.ufo2.update(dt)
 
   elseif love.keyboard.isDown(" ") then
     objects.ships.player.shoot()
-    love.audio.play(pewsound)
+    
   else
     love.audio.stop(thrustsound)
-    objects.ships.player.body:setLinearDamping(0)
+    objects.ships.player.body:setLinearDamping(0.1)
   end
   
 end
